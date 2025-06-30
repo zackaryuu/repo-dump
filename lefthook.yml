@@ -1,0 +1,12 @@
+pre-commit:
+  commands:
+    auto-protect:
+      run: python .github/scripts/autoProtect.py
+      stage_fixed: true
+      fail_text: "Failed to protect zip files with PROTECT tag"
+
+pre-push:
+  commands:
+    auto-protect:
+      run: python .github/scripts/autoProtect.py
+      fail_text: "Failed to protect zip files with PROTECT tag"
