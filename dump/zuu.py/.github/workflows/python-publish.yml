@@ -1,0 +1,62 @@
+name: Upload Python Package
+
+on:
+  push:
+    paths:
+      - 'pyproject.toml'
+  workflow_dispatch:
+
+jobs:
+  release-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Check version format
+        id: version_check
+        run: |
+          version_line=$(grep '^version =' pyproject.toml)
+          version=$(echo "$version_line" | awk -F'"' '{print $2}')
+          IFS='.' read -ra parts <<< "$version"
+          if [ "${#parts[@]}" -eq 3 ] && [ "${parts[2]}" -eq "0" ]; then
+            echo "valid_version=true" >> $GITHUB_OUTPUT
+          else
+            echo "::warning::Version $version is not in x.x.0 format. Skipping build."
+            echo "valid_version=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: build release distributions
+        if: steps.version_check.outputs.valid_version == 'true'
+        run: |
+          # NOTE: put your own distribution build steps here.
+          python -m pip install build
+          python -m build
+
+      - name: upload windows dists
+        if: steps.version_check.outputs.valid_version == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-dists
+          path: dist/
+
+  pypi-publish:
+    runs-on: ubuntu-latest
+    needs:
+      - release-build
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Retrieve release distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: release-dists
+          path: dist/
+
+      - name: Publish release distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1

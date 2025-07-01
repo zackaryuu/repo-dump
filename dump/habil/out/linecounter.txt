@@ -1,0 +1,60 @@
+===============================================================================
+EXTENSION NAME : linecounter
+EXTENSION VERSION : 0.2.7
+-------------------------------------------------------------------------------
+count time : 2022-10-10 23:49:33
+count workspace : c:\Users\zacka\Documents\GitHub\habil
+total files : 41
+total code lines : 1018
+total comment lines : 11
+total blank lines : 289
+
+    statistics
+   |      extension|     total code|  total comment|    total blank|percent|
+   -------------------------------------------------------------------------
+   |            .py|            878|             11|            247|     86|
+   |               |             97|              0|             19|    9.5|
+   |            .md|             43|              0|             23|    4.2|
+   -------------------------------------------------------------------------
+.gitattributes, code is 2, comment is 0, blank is 0.
+.gitignore, code is 78, comment is 0, blank is 15.
+habil\__init__.py, code is 2, comment is 0, blank is 1.
+habil\base\__init__.py, code is 41, comment is 0, blank is 10.
+habil\base\clientInterface.py, code is 2, comment is 0, blank is 0.
+habil\base\clientMeta.py, code is 14, comment is 0, blank is 8.
+habil\base\elementMeta.py, code is 28, comment is 1, blank is 9.
+habil\elements\habit.py, code is 0, comment is 0, blank is 0.
+habil\elements\reward.py, code is 0, comment is 0, blank is 0.
+habil\elements\tag.py, code is 3, comment is 0, blank is 2.
+habil\elements\todo.py, code is 0, comment is 0, blank is 0.
+habil\handler\abcHandler.py, code is 21, comment is 0, blank is 8.
+habil\handler\abcTasks.py, code is 0, comment is 0, blank is 0.
+habil\handler\habits.py, code is 0, comment is 0, blank is 0.
+habil\handler\rewards.py, code is 0, comment is 0, blank is 0.
+habil\handler\tags.py, code is 11, comment is 0, blank is 1.
+habil\handler\todos.py, code is 0, comment is 0, blank is 0.
+habilBase\exceptions.py, code is 8, comment is 0, blank is 3.
+habilBase\logger.py, code is 3, comment is 0, blank is 2.
+habilBase\reqHandler.py, code is 57, comment is 3, blank is 21.
+habilBase\request\__init__.py, code is 23, comment is 0, blank is 9.
+habilBase\request\__init_structs__.py, code is 3, comment is 0, blank is 0.
+habilBase\request\actionPair.py, code is 20, comment is 0, blank is 15.
+habilBase\request\auth.py, code is 3, comment is 0, blank is 0.
+habilBase\request\case.py, code is 178, comment is 7, blank is 38.
+habilBase\request\param.py, code is 21, comment is 0, blank is 7.
+habilBase\request\requester.py, code is 67, comment is 0, blank is 23.
+habilBase\request\requestPacker.py, code is 108, comment is 0, blank is 20.
+habilBase\request\specifier.py, code is 50, comment is 0, blank is 15.
+habilBase\request\valuePair.py, code is 44, comment is 0, blank is 23.
+habilBase\requestMap\__init__.py, code is 3, comment is 0, blank is 2.
+habilBase\requestMap\base.py, code is 7, comment is 0, blank is 1.
+habilBase\requestMap\tag.py, code is 28, comment is 0, blank is 7.
+habilBase\requestMap\user.py, code is 9, comment is 0, blank is 1.
+LICENSE, code is 17, comment is 0, blank is 4.
+README.md, code is 43, comment is 0, blank is 23.
+setup.py, code is 33, comment is 0, blank is 1.
+tests\test_habil_base.py, code is 52, comment is 0, blank is 7.
+tests\test_habil_handler_tags.py, code is 0, comment is 0, blank is 0.
+tests\test_habilbase_requestmap.py, code is 15, comment is 0, blank is 4.
+utils\testcase.py, code is 24, comment is 0, blank is 9.
+===============================================================================

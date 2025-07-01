@@ -1,0 +1,295 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+% Awesome CV LaTeX Template for CV/Resume
+%
+% This template has been downloaded from:
+% https://github.com/posquit0/Awesome-CV
+%
+% Author:
+% Claud D. Park <posquit0.bj@gmail.com>
+% http://www.posquit0.com
+%
+% Template license:
+% CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
+%
+
+
+%-------------------------------------------------------------------------------
+% CONFIGURATIONS
+%-------------------------------------------------------------------------------
+% A4 paper size by default, use 'letterpaper' for US letter
+\documentclass[11pt, a4paper]{awesome-cv}
+
+% Configure page margins with geometry
+\geometry{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=1.5cm}
+
+% Color for highlights
+% Awesome Colors: awesome-emerald, awesome-skyblue, awesome-red, awesome-pink, awesome-orange
+%                 awesome-nephritis, awesome-concrete, awesome-darknight
+\colorlet{awesome}{awesome-red}
+% Uncomment if you would like to specify your own color
+% \definecolor{awesome}{HTML}{3E6D9C}
+
+% Colors for text
+% Uncomment if you would like to specify your own color
+% \definecolor{darktext}{HTML}{414141}
+% \definecolor{text}{HTML}{333333}
+% \definecolor{graytext}{HTML}{5D5D5D}
+% \definecolor{lighttext}{HTML}{999999}
+% \definecolor{sectiondivider}{HTML}{5D5D5D}
+
+% Set false if you don't want to highlight section with awesome color
+\setbool{acvSectionColorHighlight}{true}
+
+% If you would like to change the social information separator from a pipe (|) to something else
+\renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
+
+
+\name{$info.firstname$}{$info.lastname$}
+\position{$for(profile.corecomp)$$profile.corecomp${\enskip\cdotp\enskip}$endfor$}
+
+$if(info.address)$
+\address{$info.address$}
+$else$
+\address{$info.street$ \\ $info.city$ \\ $info.province$ \\ $info.country$ \\ $info.postalcode$}
+$endif$
+
+\mobile{$info.mobile$}
+\email{$info.email$}
+$if(info.homepage)$
+\homepage{$info.homepage$}
+$endif$
+$if(info.github)$
+\github{$info.github$}
+$endif$
+$if(info.gitlab)$
+\gitlab{$info.gitlab$}
+$endif$
+$if(info.linkedin)$
+\linkedin{$info.linkedin$}
+$endif$
+
+\quote{$profile.summary$}
+
+\begin{document}
+\makecvheader[C]
+\vspace{1mm}
+%-------------------------------------------------------------------------------
+
+% Print the footer with 3 arguments(<left>, <center>, <right>)
+% Leave any of these blank if they are not needed
+\makecvfooter
+  {\today}
+  {$info.firstname$ $info.lastname$~~~·~~~Résumé}
+  {\thepage}
+
+
+%-------------------------------------------------------------------------------
+% ! qualification
+%-------------------------------------------------------------------------------
+\cvsection{Qualifications}
+\newcommand*{\qualstyle}[1]{{\fontsize{10.5pt}{1.2em}\bodyfont\color{graytext} #1}}
+$if(profile.topqual)$
+\vspace{4mm}
+\begin{cvitems}
+$for(profile.topqual)$    
+    \item{\qualstyle{$profile.topqual$}}
+$endfor$
+\end{cvitems}
+\vspace{4mm}
+$endif$
+
+$if(qual)$
+$for(qual)$
+\vspace{4mm}
+\begin{cvsubsection}{$qual.title$}
+\vspace{2mm}
+\begin{cvitems}
+$for(qual.items)$
+    \item{\qualstyle{$qual.items$}}
+$endfor$
+\end{cvitems}
+\vspace{4mm}
+$endfor$
+$endif$
+%-------------------------------------------------------------------------------
+% ! Work experience
+%-------------------------------------------------------------------------------
+\cvsection{Work Experience}
+\begin{cventries}
+
+$for(exp)$
+\vspace{4mm}
+\cventry
+{$exp.position$}
+{$exp.organization$}
+{$exp.location$}
+{$exp.datestart$ - $exp.dateend$} 
+{
+\begin{cvitems}
+$for(exp.items)$
+    \item{\normalsize $exp.items$}
+$endfor$
+\end{cvitems}
+}
+\vspace{4mm}
+$endfor$
+\end{cventries}
+
+$if(expl)$
+\vspace{2mm}
+$for(expl)$
+\cvsubsection{$expl.title$}
+\vspace{2mm}
+\begin{cvhonors}
+$for(expl.items)$
+\cvhonor
+  {$expl.items.name$}
+  {$expl.items.des$}
+  {$expl.items.location$}
+  {$expl.items.year$}
+$endfor$
+\end{cvhonors}
+\vspace{4mm}
+$endfor$
+$endif$
+
+
+%----------------------------------------------------------------------
+% ! Projects
+%----------------------------------------------------------------------
+$if(project)$
+\cvsection{Projects}
+
+\begin{cventries}
+
+$for(project)$
+\vspace{4mm}
+\cventry
+{$project.type$}
+{$project.name$}
+{$project.position$}
+{$project.datestart$ - $project.dateend$}
+{
+$if(project.items)$
+\begin{cvitems}
+$for(project.items)$
+    \item{\normalsize $project.items$}
+$endfor$
+\end{cvitems}
+$endif$
+}
+\vspace{4mm}
+$endfor$
+\end{cventries}
+$endif$
+
+$if(projectl)$
+$if(project)$
+$if(projectl)$
+\cvsubsection{Other Notable Projects}
+$endif$
+$else$
+\cvsubsection{Other Notable Projects}
+$endif$
+$for(projectl.items)$
+\cvsubsection{$projectl.title$}
+\begin{cvhonors}
+$for(projectl.items)$
+\cvhonor
+  {$projectl.items.name$}
+  {$projectl.items.des$}
+  {$projectl.items.location$}
+  {$projectl.items.year$}
+$endfor$
+\end{cvhonors}
+\vspace{4mm}
+$endfor$
+$endif$
+
+%-------------------------------------------------------------------------------
+% ! Other Work experience
+%-------------------------------------------------------------------------------
+$if(otherexp)$
+\cvsection{Other Experience}
+\begin{cventries}
+
+$for(otherexp)$
+\vspace{4mm}
+\cventry
+{$otherexp.position$}
+{$otherexp.organization$}
+{$otherexp.location$}
+{$otherexp.datestart$ - $otherexp.dateend$} 
+{
+\begin{cvitems}
+$for(otherexp.items)$
+    \item{\normalsize $otherexp.items$}
+$endfor$
+\end{cvitems}
+}
+\vspace{4mm}
+$endfor$
+\end{cventries}
+
+$if(otherexpl)$
+$for(otherexpl)$
+\cvsubsection{$otherexpl.title$}
+\begin{cvhonors}
+$for(otherexpl.items)$
+\cvhonor
+  {$otherexpl.items.name$}
+  {$otherexpl.items.des$}
+  {$otherexpl.items.location$}
+  {$otherexpl.items.year$}
+$endfor$
+\end{cvhonors}
+\vspace{4mm}
+$endfor$
+$endif$
+$endif$
+
+%-------------------------------------------------------------------------
+% ! Education
+%-------------------------------------------------------------------------
+\cvsection{Education}
+\begin{cventries}
+
+$for(edu)$
+\vspace{4mm}
+\cventry
+{$edu.degree$}
+{$edu.institution$}
+{$edu.location$}
+{$edu.datestart$ - $edu.dateend$}
+{
+$if(edu.items)$
+\begin{cvitems}
+$for(edu.items)$
+    \item{\normalsize $edu.items$}
+$endfor$
+\end{cvitems}
+$endif$
+}
+\vspace{4mm}
+$endfor$
+\end{cventries}
+
+$if(edul)$
+$for(edul)$
+\cvsubsection{$edul.title$}
+\begin{cvhonors}
+$for(edul.items)$
+\cvhonor
+  {$edul.items.name$}
+  {$edul.items.des$}
+  {$edul.items.location$}
+  {$edul.items.year$}
+$endfor$
+\end{cvhonors}
+\vspace{4mm}
+$endfor$
+$endif$
+
+
+\end{document}

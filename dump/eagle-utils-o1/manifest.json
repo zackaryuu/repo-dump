@@ -1,0 +1,16 @@
+{
+    "id": "8585fdfe-3370-4d9d-9ed6-a5ad9befca26",
+    "version": "1.0.0",
+    "platform": "all",
+    "arch": "all",
+    "name": "eagle-utils",
+    "logo": "/logo.png",
+    "keywords": [],
+    "devTools": true,
+    "main": {
+        "devTools": true,
+        "url": "js/index.html",
+        "width": 640,
+        "height": 480
+    }
+}

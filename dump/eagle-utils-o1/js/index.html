@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+</head>
+
+<body>
+    <script>
+        const path = require('path');
+        const {PluginConfig} = require(path.join(path.dirname(eagle.plugin.path), 'utils', 'pluginConfig.js'));
+        const {importUtil} = require(path.join(path.dirname(eagle.plugin.path), 'utils', 'app.js'));
+        const {PerPluginConfig} = require(path.join(path.dirname(eagle.plugin.path), 'utils', 'perPluginConfig.js'));
+        console.log(eagle);
+
+        async function itemSet() {
+            const itemSelected = await eagle.item.getSelected();
+            if (itemSelected.length != 1) {
+                await eagle.dialog.showMessageBox({
+                    title: 'Invalid item selected',
+                    message: 'Please select an item',
+                    buttons: ['OK'],
+                    defaultId: 0,
+                    cancelId: 0,
+                    type: 'info',
+                });
+                return;
+            }
+
+            const {ItemProp} = importUtil('itemProp');
+            const itemProp = new ItemProp(itemSelected[0]);
+
+            await itemProp.setLocal("test", 1);
+        }
+
+        async function itemGet() {
+            const itemSelected = await eagle.item.getSelected();
+            if (itemSelected.length != 1) {
+                await eagle.dialog.showMessageBox({
+                    title: 'Invalid item selected',
+                    message: 'Please select an item',
+                    buttons: ['OK'],
+                    defaultId: 0,
+                    cancelId: 0,
+                    type: 'info',
+                });
+                return;
+            }
+
+            const {ItemProp} = importUtil('itemProp');
+            const itemProp = new ItemProp(itemSelected[0]);
+
+            const test = await itemProp.getLocal("test");
+            const result = test === undefined ? "undefined" : test;
+            await eagle.dialog.showMessageBox({
+                title: 'Item Get',
+                message: `test: ${result}`,
+                buttons: ['OK'],
+                defaultId: 0,
+                cancelId: 0,
+            });
+        }
+
+    </script>
+    <div style="border: 1px solid #000; padding: 10px;">
+        <button onclick="(async () => { await PluginConfig.setLocal('test', 1) })()">Set Plugin Variable to 1</button>
+        <button onclick="(async () => { await PluginConfig.setGlobal('test', 2) })()">Set Global Variable to 2</button>
+        <button onclick="(async () => { console.log(await PluginConfig.getRaw()) })()">Log Variables</button>
+    </div>
+	
+    <div style="border: 1px solid red; padding: 10px;">    
+        <button onclick="itemSet()">Item Set</button>
+        <button onclick="itemGet()">Item Get</button>
+    </div>
+
+    <div style="border: 1px solid blue; padding: 10px;">
+        <button onclick="PerPluginConfig.set('test', 1)">Per Plugin Config Set</button>
+        <button onclick="(async () => { console.log(await PerPluginConfig.get('test')) })()">Per Plugin Config Get</button>
+
+    </div>
+</body>
+</html>

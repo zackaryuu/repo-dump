@@ -1,0 +1,31 @@
+[project]
+name = "png-zip"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "ZackaryW", email = "36378555+ZackaryW@users.noreply.github.com" }
+]
+dependencies = [
+    "click>=8.1.7",
+]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/png_zip"]
+
+# entry point
+[project.scripts]
+pngzip = "png_zip.cli:cli"
+
