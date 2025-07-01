@@ -1,0 +1,1 @@
+from resumer.simple import SimpleResumer

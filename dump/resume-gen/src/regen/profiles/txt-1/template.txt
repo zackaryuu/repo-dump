@@ -1,0 +1,129 @@
+# Personal Information
+$if(info.firstname)$
+Name: $info.firstname$ $info.lastname$  
+$endif$
+$if(info.email)$
+Email: $info.email$  
+$endif$
+$if(info.mobile)$
+Mobile: $info.mobile$  
+$endif$
+$if(info.address)$
+Address: $info.address$  
+$endif$
+$if(info.homepage)$
+Homepage: $info.homepage$  
+$endif$
+$if(info.github)$
+GitHub: $info.github$  
+$endif$
+$if(info.gitlab)$
+GitLab: $info.gitlab$  
+$endif$
+$if(info.linkedin)$
+LinkedIn: $info.linkedin$  
+$endif$
+
+# Summary
+$if(profile.summary)$
+$profile.summary$
+$endif$
+
+# Qualifications  
+$if(profile.topqual)$
+- Top Qualifications:
+$for(profile.topqual)$
+- $profile.topqual$
+$endfor$
+$endif$
+
+$if(qual)$
+$for(qual)$
+Title: $qual.title$  
+$if(qual.items)$
+$for(qual.items)$
+- $qual.items$
+$endfor$
+$endif$
+$endfor$
+$endif$
+
+# Work Experience  
+$if(exp)$
+$for(exp)$
+Position: $exp.position$ at $exp.organization$  
+Location: $exp.location$  
+Duration: $exp.datestart$ - $exp.dateend$  
+$if(exp.items)$
+$for(exp.items)$
+- $exp.items$
+$endfor$
+$endif$
+$endfor$
+$endif$
+
+$if(expl)$
+$for(expl)$
+Title: $expl.title$  
+$if(expl.items)$
+$for(expl.items)$
+- $expl.items.name$: $expl.items.des$ ($expl.items.location$, $expl.items.year$)
+$endfor$
+$endif$
+$endfor$
+$endif$
+
+# Projects  
+$if(project)$
+$for(project)$
+Name: $project.name$ - Type: $project.type$  
+Position: $project.position$  
+Duration: $project.datestart$ - $project.dateend$  
+$if(project.items)$
+$for(project.items)$
+- $project.items$
+$endfor$
+$endif$
+$endfor$
+$endif$
+
+$if(projectl)$
+Other Notable Projects  
+$for(projectl.items)$
+Title: $projectl.title$  
+$if(projectl.items)$
+$for(projectl.items)$
+- $projectl.items.name$: $projectl.items.des$ ($projectl.items.location$, $projectl.items.year$)
+$endfor$
+$endif$
+$endfor$
+$endif$
+
+# Other Experience  
+$if(otherexp)$
+$for(otherexp)$
+Position: $otherexp.position$ at $otherexp.organization$  
+Location: $otherexp.location$  
+Duration: $otherexp.datestart$ - $otherexp.dateend$  
+$if(otherexp.items)$
+- Responsibilities:
+$for(otherexp.items)$
+- $otherexp.items$
+$endfor$
+$endif$
+$endfor$
+$endif$
+
+# Education  
+$if(edu)$
+$for(edu)$
+Degree: $edu.degree$ from $edu.institution$  
+Location: $edu.location$  
+Duration: $edu.datestart$ - $edu.dateend$  
+$if(edu.items)$
+$for(edu.items)$
+- $edu.items$
+$endfor$
+$endif$
+$endfor$
+$endif$

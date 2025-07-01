@@ -1,0 +1,3 @@
+class HabilClientInterface:
+    pass
+    

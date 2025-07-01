@@ -1,0 +1,34 @@
+[project]
+name = "zuu"
+version = "7.3.0"
+description = "Zack's Useful Utilities"
+authors = [
+    { name = "ZackaryW", email = "gitzackw@gmail.com" }
+]
+dependencies = []
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "pytest>=8.3.4",
+    "pyyaml>=6.0.2",
+    "toml>=0.10.2",
+    "requests>=2.32.3",
+    "croniter>=6.0.0",
+    "dateparser>=1.2.1",
+    "pygetwindow>=0.0.9",
+    "psutil>=7.0.0",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/zuu"]
+

@@ -1,0 +1,280 @@
+{
+    "extension": "linecounter",
+    "version": "0.2.7",
+    "workspace": "c:\\Users\\zacka\\Documents\\GitHub\\habil",
+    "linecount": [
+        {
+            "version": "0.2.7",
+            "counttime": "2022-10-10 23:49:33",
+            "filesum": 41,
+            "codesum": 1018,
+            "commentsum": 11,
+            "blanksum": 289,
+            "statistics": {
+                ".py": {
+                    "code": 878,
+                    "comment": 11,
+                    "blank": 247
+                },
+                "": {
+                    "code": 97,
+                    "comment": 0,
+                    "blank": 19
+                },
+                ".md": {
+                    "code": 43,
+                    "comment": 0,
+                    "blank": 23
+                }
+            },
+            "filelist": [
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": ".gitattributes"
+                },
+                {
+                    "blank": 15,
+                    "code": 78,
+                    "comment": 0,
+                    "filename": ".gitignore"
+                },
+                {
+                    "blank": 1,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "habil\\__init__.py"
+                },
+                {
+                    "blank": 10,
+                    "code": 41,
+                    "comment": 0,
+                    "filename": "habil\\base\\__init__.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "habil\\base\\clientInterface.py"
+                },
+                {
+                    "blank": 8,
+                    "code": 14,
+                    "comment": 0,
+                    "filename": "habil\\base\\clientMeta.py"
+                },
+                {
+                    "blank": 9,
+                    "code": 28,
+                    "comment": 1,
+                    "filename": "habil\\base\\elementMeta.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "habil\\elements\\habit.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "habil\\elements\\reward.py"
+                },
+                {
+                    "blank": 2,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "habil\\elements\\tag.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "habil\\elements\\todo.py"
+                },
+                {
+                    "blank": 8,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "habil\\handler\\abcHandler.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "habil\\handler\\abcTasks.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "habil\\handler\\habits.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "habil\\handler\\rewards.py"
+                },
+                {
+                    "blank": 1,
+                    "code": 11,
+                    "comment": 0,
+                    "filename": "habil\\handler\\tags.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "habil\\handler\\todos.py"
+                },
+                {
+                    "blank": 3,
+                    "code": 8,
+                    "comment": 0,
+                    "filename": "habilBase\\exceptions.py"
+                },
+                {
+                    "blank": 2,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "habilBase\\logger.py"
+                },
+                {
+                    "blank": 21,
+                    "code": 57,
+                    "comment": 3,
+                    "filename": "habilBase\\reqHandler.py"
+                },
+                {
+                    "blank": 9,
+                    "code": 23,
+                    "comment": 0,
+                    "filename": "habilBase\\request\\__init__.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "habilBase\\request\\__init_structs__.py"
+                },
+                {
+                    "blank": 15,
+                    "code": 20,
+                    "comment": 0,
+                    "filename": "habilBase\\request\\actionPair.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "habilBase\\request\\auth.py"
+                },
+                {
+                    "blank": 38,
+                    "code": 178,
+                    "comment": 7,
+                    "filename": "habilBase\\request\\case.py"
+                },
+                {
+                    "blank": 7,
+                    "code": 21,
+                    "comment": 0,
+                    "filename": "habilBase\\request\\param.py"
+                },
+                {
+                    "blank": 23,
+                    "code": 67,
+                    "comment": 0,
+                    "filename": "habilBase\\request\\requester.py"
+                },
+                {
+                    "blank": 20,
+                    "code": 108,
+                    "comment": 0,
+                    "filename": "habilBase\\request\\requestPacker.py"
+                },
+                {
+                    "blank": 15,
+                    "code": 50,
+                    "comment": 0,
+                    "filename": "habilBase\\request\\specifier.py"
+                },
+                {
+                    "blank": 23,
+                    "code": 44,
+                    "comment": 0,
+                    "filename": "habilBase\\request\\valuePair.py"
+                },
+                {
+                    "blank": 2,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "habilBase\\requestMap\\__init__.py"
+                },
+                {
+                    "blank": 1,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "habilBase\\requestMap\\base.py"
+                },
+                {
+                    "blank": 7,
+                    "code": 28,
+                    "comment": 0,
+                    "filename": "habilBase\\requestMap\\tag.py"
+                },
+                {
+                    "blank": 1,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "habilBase\\requestMap\\user.py"
+                },
+                {
+                    "blank": 4,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "LICENSE"
+                },
+                {
+                    "blank": 23,
+                    "code": 43,
+                    "comment": 0,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 1,
+                    "code": 33,
+                    "comment": 0,
+                    "filename": "setup.py"
+                },
+                {
+                    "blank": 7,
+                    "code": 52,
+                    "comment": 0,
+                    "filename": "tests\\test_habil_base.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "tests\\test_habil_handler_tags.py"
+                },
+                {
+                    "blank": 4,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "tests\\test_habilbase_requestmap.py"
+                },
+                {
+                    "blank": 9,
+                    "code": 24,
+                    "comment": 0,
+                    "filename": "utils\\testcase.py"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,110 @@
+[info]
+address = "456 Sorcery Street, Arcane City, AC2 4B7, Fantasia"
+city = "Arcane City"
+country = "Fantasia"
+email = "gandalf.thegrey@wizardry.com"
+firstname = "Gandalf"
+github = "GandalfTheGrey"
+lastname = "The Grey"
+linkedin = "gandalf_wizard"
+middleinitial = "T"
+middlename = "The"
+mobile = "(+44) 888-987-6543"
+postalcode = "AC2 4B7"
+province = "Fantasia"
+
+[profile]
+summary = "Experienced wizard with a deep understanding of magical arts and a passion for teaching."
+corecomp = [
+    "master spell caster",
+    "strategic thinker",
+    "mentor to young wizards",
+]
+topqual = [
+    "Order of the Istari",
+    "Council of Elrond Member",
+]
+
+[[qual]]
+title = "Master Wizard"
+items = [
+    "Led the Fellowship of the Ring",
+    "Defeated the Balrog of Moria",
+]
+
+[[exp]]
+position = "Chief Wizard"
+organization = "White Council"
+location = "Isengard, Fantasia"
+datestart = "1954"
+dateend = "Present"
+items = [
+    "Advised on matters of magic and strategy",
+    "Led initiatives to combat dark forces",
+]
+
+[[exp]]
+position = "Grey Pilgrim"
+organization = "Middle-earth"
+location = "Various Locations"
+datestart = "1900"
+dateend = "1954"
+items= [
+    "Traveled extensively to gather knowledge",
+    "Assisted in the defeat of Sauron",
+]
+
+[[project]]
+name = "The One Ring Quest"
+position = "Leader"
+type = "Adventure"
+datestart = "1954"
+dateend = "1955"
+items = [
+    "Guided the Fellowship to Mordor",
+    "Ensured the destruction of the One Ring",
+]
+
+[[project]]
+name = "White Council Meetings"
+position = "Chair"
+type = "Council"
+datestart = "1930"
+dateend = "1954"
+items = [
+    "Organized meetings to discuss threats",
+    "Formulated plans to counteract Sauron",
+]
+
+[[project]]
+name = "Hobbiton Restoration"
+position = "Advisor"
+type = "Community"
+datestart = "1955"
+dateend = "1956"
+items = [
+    "Advised on the rebuilding of Hobbiton",
+    "Promoted peace and prosperity in the Shire",
+]
+
+[[otherexp]]
+position = "Wanderer"
+organization = "Middle-earth"
+location = "Various"
+datestart = "1800"
+dateend = "1900"
+items = [
+    "Explored the lands of Middle-earth",
+    "Gathered ancient lore and wisdom",
+]
+
+[[edu]]
+degree = "Master of Magic"
+institution = "Valinor Academy of Wizardry"
+datestart = "1700"
+dateend = "1750"
+location = "Valinor, Fantasia"
+items = [
+    "Studied under the Valar",
+    "Specialized in elemental magic",
+]

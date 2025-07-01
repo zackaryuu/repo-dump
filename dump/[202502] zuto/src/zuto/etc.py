@@ -1,0 +1,3 @@
+
+class SequenceUseException(Exception):
+    pass

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<script src="app.js"></script>
+	<link rel="stylesheet" href="app.css">
+	<link rel="stylesheet" href="service.css">
+	<script src="./struct.js"></script>
+	<script src="./svchandlers/base.js"></script>
+	<script src="./svchandlers/eagleLink.js"></script>
+	<script src="./svchandlers/pathstr.js"></script>
+</head>
+<body>
+	<div class="toggle-switch">
+		<label id="configLevel">Global Setting</label>
+		<label class="switch">
+			<input type="checkbox" id="clipboardToggle">
+			<span class="slider"></span>
+		</label>
+	</div>
+	<!-- Add new toggle switches -->
+	<div class="toggle-switch">
+		<label>Show Active State</label>
+		<label class="switch">
+			<input type="checkbox" id="activeStateToggle">
+			<span class="slider"></span>
+		</label>
+	</div>
+	<div class="toggle-switch">
+		<label>Pin Window</label>
+		<label class="switch">
+			<input type="checkbox" id="pinWindowToggle">
+			<span class="slider"></span>
+		</label>
+	</div>
+	<br><br><br><br><br><br>
+	<div class="content-area">
+		<input type="text" id="librarySearch" placeholder="Search libraries..." class="search-bar">
+		<div class="library-list"></div>
+	</div>
+	<script>
+		
+		let clipboardCheckInterval;
+		let clipboardCache = null;
+		let shiftKeyIsDown = false;
+		let libraries = null;
+		let libraryAtLink = null;
+		let pinWindowState = false;
+
+		// 1. Initialize manager each check
+		const clipboardManager = new ClipboardBaseManager();
+				
+		// 2. Create handler with eagle instance
+		const eagleLinkHandler = new EagleLinkHandler(eagle);
+		const pathstrHandler = new PathstrHandler(eagle);
+
+		// 3. Register the handler
+		clipboardManager.registerHandler(eagleLinkHandler);
+		clipboardManager.registerHandler(pathstrHandler);
+		
+
+		async function createLibraryList(){
+			const {EagleApi, EagleApiUtils} = require(path.join(eagle.plugin.path, 'utils', 'api'));
+			libraries = await EagleApi.library.history();
+			
+			// Normalize paths and remove duplicates
+			const uniquePaths = new Set(
+				libraries.map(libPath => path.normalize(libPath).replace(/[\\/]+$/, ''))
+			);
+			libraries = Array.from(uniquePaths);
+		}
+
+		async function createTableOfEagleLibraries() {
+			try {
+				const {EagleApi, EagleApiUtils} = require(path.join(eagle.plugin.path, 'utils', 'api'));
+				
+				const table = document.createElement('table');
+				const tbody = document.createElement('tbody');
+				table.className = 'library-table';
+				
+				// Add search functionality
+				const searchInput = document.getElementById('librarySearch');
+				const filterLibraries = (searchTerm) => {
+					const rows = document.querySelectorAll('.library-row');
+					rows.forEach(row => {
+						const libName = row.querySelector('.library-name').textContent.toLowerCase();
+						row.style.display = libName.includes(searchTerm) ? '' : 'none';
+					});
+				};
+				
+				searchInput.addEventListener('input', (e) => {
+					filterLibraries(e.target.value.toLowerCase());
+				});
+
+				libraries.forEach(libraryPath => {
+					const libName = path.basename(libraryPath).replace('.library', '');
+					
+					const row = document.createElement('tr');
+					row.className = 'library-row';
+					row.dataset.libraryPath = libraryPath;
+					row.innerHTML = `
+						<td class="library-name">${libName}</td>
+					`;
+					
+					row.addEventListener('click', async () => {
+						try {
+							console.log('switching to library:', libraryPath);
+							await EagleApi.library.switch(libraryPath);
+							
+							if (document.getElementById('activeStateToggle').checked) {
+								row.classList.add('active');
+								setTimeout(() => row.classList.remove('active'), 500);
+							}
+						} catch (error) {
+							console.error('Failed to switch library:', error);
+							row.classList.add('error');
+							setTimeout(() => row.classList.remove('error'), 2000);
+						}
+					});
+					
+					tbody.appendChild(row);
+				});
+
+				table.appendChild(tbody);
+				const contentArea = document.querySelector('.content-area');
+				const libraryList = contentArea.querySelector('.library-list');
+				libraryList.innerHTML = '';
+				libraryList.appendChild(table);
+				
+			} catch (error) {
+				console.error('Failed to load libraries:', error);
+				const errorElement = document.createElement('div');
+				errorElement.className = 'error-message';
+				errorElement.textContent = 'Failed to load libraries. Please check the developer tools for details.';
+				document.querySelector('.library-list').appendChild(errorElement);
+			}
+		}
+
+		async function checkClipboardContent() {
+			const modal = document.querySelector('.clipboard-modal');
+			
+			const { PerPluginConfig } = require(path.join(eagle.plugin.path, 'utils', 'perPluginConfig.js'));
+			const toggleTrackClipboard = await PerPluginConfig.get('toggleForClipboardListen');
+			if (!toggleTrackClipboard) return;
+
+			try {
+				const text = await eagle.clipboard.readText();
+				if (text.length > 2048) return;
+
+				if (text === clipboardCache) return;
+				clipboardCache = text;
+
+				if (!clipboardManager.hasMatch(text)) {
+					return; 
+				}
+				
+				// if activeStateToggle is checked, add active class to the row
+				if (document.getElementById('activeStateToggle').checked) {
+					await eagle.window.show();
+				}
+				await clipboardManager.processText(text, {	
+					libraries
+				})
+
+			} catch (err) {
+				console.error('Clipboard check failed:', err);
+			}
+		}
+
+		function updateLevelIndicator(scope) {
+			const levelElement = document.getElementById('configLevel');
+			levelElement.textContent = scope === 'library' 
+				? 'Library Setting' 
+				: 'Global Setting';
+		}
+
+		eagle.onPluginRun(async () => {
+			console.log("eagle.onPluginRun");
+			await createLibraryList();
+			await createTableOfEagleLibraries();
+			
+
+			const toggleElement = document.getElementById('clipboardToggle');
+			const {PerPluginConfig} = require(path.join(eagle.plugin.path, 'utils', 'perPluginConfig.js'));
+			
+			toggleElement.checked = await PerPluginConfig.get('toggleForClipboardListen', {
+				libraryId: eagle.library.path
+			});
+			const isLibrary = await PerPluginConfig.getForLibrary(eagle.library.path, 'toggleForClipboardListen');
+			updateLevelIndicator(isLibrary !== undefined ? 'library' : 'global');
+
+			// Event listener with shift key handling
+			toggleElement.addEventListener('change', async function(event) {
+				const isChecked = this.checked;
+				
+				if (!isChecked) {
+					await PerPluginConfig.pop('toggleForClipboardListen', {
+						libraryId: eagle.library.path
+					});
+					updateLevelIndicator('global');
+					return;
+				}
+
+				if (!shiftKeyIsDown) {
+					await PerPluginConfig.setGlobal('toggleForClipboardListen', isChecked);
+					updateLevelIndicator('global');
+					return;
+				}
+				shiftKeyIsDown = false;
+				
+				await PerPluginConfig.setLibrary(eagle.library.path, 'toggleForClipboardListen', isChecked);
+				updateLevelIndicator('library');
+			});
+
+			clipboardCheckInterval = setInterval(checkClipboardContent, 500);
+			
+
+			document.addEventListener('keydown', (event) => {
+				if (event.shiftKey && !shiftKeyIsDown) {
+					shiftKeyIsDown = true;
+					console.log('Shift key pressed');  // For debugging
+				}
+			});
+			
+			document.addEventListener('keyup', (event) => {
+				if (event.key === 'Shift' && shiftKeyIsDown) {
+					shiftKeyIsDown = false;
+					console.log('Shift key released');  // For debugging
+				}
+			});
+			
+			// Initialize new toggles
+			const activeStateToggle = document.getElementById('activeStateToggle');
+			const pinWindowToggle = document.getElementById('pinWindowToggle');
+
+			// Load toggle states with proper config checking
+			activeStateToggle.checked = await PerPluginConfig.get('showActiveState', {
+				libraryId: eagle.library.path,
+				defaultValue: true
+			});
+			if (activeStateToggle === null) {
+				activeStateToggle.checked = true;
+			}
+
+			pinWindowToggle.checked = await PerPluginConfig.get('pinWindowState', {
+				libraryId: eagle.library.path,
+				defaultValue: false
+			});
+
+			// Set initial pin state
+			await eagle.window.setAlwaysOnTop(pinWindowToggle.checked);
+
+			// Add toggle listeners with shift key handling
+			activeStateToggle.addEventListener('change', async function() {
+				if (shiftKeyIsDown) {
+					await PerPluginConfig.setLibrary(eagle.library.path, 'showActiveState', this.checked);
+				} else {
+					await PerPluginConfig.setGlobal('showActiveState', this.checked);
+				}
+				shiftKeyIsDown = false;
+			});
+
+			pinWindowToggle.addEventListener('change', async function() {
+				const newState = this.checked;
+				if (shiftKeyIsDown) {
+					await PerPluginConfig.setLibrary(eagle.library.path, 'pinWindowState', newState);
+				} else {
+					await PerPluginConfig.setGlobal('pinWindowState', newState);
+				}
+				shiftKeyIsDown = false;
+				await eagle.window.setAlwaysOnTop(newState);
+			});
+		});
+
+		eagle.onPluginBeforeExit(() => {
+			console.log("eagle.onPluginBeforeExit");
+			clearInterval(clipboardCheckInterval);
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+name: Sync Utils to Release Branch
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - utils/*.js
+
+  workflow_dispatch:
+
+jobs:
+  sync-utils:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create temporary directory
+        run: mkdir temp_sync
+        
+      - name: Checkout main branch in temp directory
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: temp_sync
+        
+      - name: Checkout release branch
+        uses: actions/checkout@v4
+        with:
+          ref: release
+          path: release
+        
+      - name: Purge root JS files
+        run: |
+          find release -maxdepth 1 -type f -name '*.js' -delete
+        
+      - name: Copy JS files from utils
+        run: |
+          cp temp_sync/utils/*.js release/
+        
+      - name: Commit and push changes
+        run: |
+          cd release
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add -A
+          git commit -m "chore: sync utils to release branch"
+          git push origin release
+        

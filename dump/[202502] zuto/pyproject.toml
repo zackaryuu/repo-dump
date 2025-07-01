@@ -1,0 +1,32 @@
+[project]
+name = "zs.zuto"
+version = "0.1.1"
+description = "a task runner"
+authors = [
+    { name = "ZackaryW", email = "gitzackw@gmail.com" }
+]
+dependencies = [
+    "pyyaml>=6.0.2",
+    "watchdog>=6.0.0",
+    "zuu @ git+https://github.com/z2u4/py_zuu.git",
+]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "pygetwindow>=0.0.9",
+    "psutil>=7.0.0",
+    "click>=8.1.8",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/zuto"]

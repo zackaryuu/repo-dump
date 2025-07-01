@@ -1,0 +1,14 @@
+name: test
+meta: 
+    lifetime : "10 seconds"
+steps:
+    - echo "Hello, world!"
+    - echo "Hello, world2!"
+    - echo "Hello, world!"
+    - echo "Hello, world!"
+    - echo "Hello, world!"
+    - echo "Hello, world!"
+    - echo "Hello, world!"
+    - echo "Hello, world!"
+    - echo "Hello, world!"
+
